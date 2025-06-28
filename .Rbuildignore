@@ -1,2 +1,8 @@
+..Rcheck
+
+^README\.Rmd$
+
 ^\.github$
 ^codecov\.yml$
+
+^docs$
