@@ -1,0 +1,19 @@
+Package: trimcluster
+Title: Cluster Analysis with Trimming
+Version: 0.1-6
+VersionNote: Released 0.1-5 on 2020-02-09 on CRAN
+Authors@R: c(person("Christian", "Hennig", role = c("aut"), email = "chrish@stats.ucl.ac.uk")
+         , person("Valentin", "Todorov", role = c("cre"), email = "valentin.todorov@chello.at", comment=c(ORCID = "0000-0003-4215-0245"))
+          )
+Depends: R (>= 1.9.0)
+Suggests: fpc
+Description: Trimmed k-means clustering. The method is described in Cuesta-Albertos et al. (1997) <doi:10.1214/aos/1031833664>.
+Maintainer: Valentin Todorov <valentin.todorov@chello.at>
+License: GPL (>=3)
+URL: http://www.homepages.ucl.ac.uk/~ucakche/
+Packaged: 2020-02-08 18:29:38 UTC; Share
+Repository: CRAN
+Date/Publication: 2020-02-09 12:10:02 UTC
+NeedsCompilation: no
+Author: Christian Hennig [aut], 
+        Valentin Todorov [cre] (<https://orcid.org/0000-0003-4215-0245>)
