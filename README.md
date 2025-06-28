@@ -8,6 +8,8 @@
 [![CRAN
 version](https://www.r-pkg.org/badges/version/trimcluster)](https://cran.r-project.org/package=trimcluster)
 [![R-CMD-check](https://github.com/valentint/trimcluster/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/valentint/trimcluster/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/valentint/trimcluster/graph/badge.svg)](https://app.codecov.io/gh/valentint/trimcluster)
 [![downloads](https://cranlogs.r-pkg.org/badges/trimcluster)](https://cran.r-project.org/package=trimcluster)
 [![downloads](https://cranlogs.r-pkg.org/badges/grand-total/trimcluster)](https://cran.r-project.org/package=trimcluster)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
