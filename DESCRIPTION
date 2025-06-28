@@ -10,7 +10,8 @@ Suggests: fpc
 Description: Trimmed k-means clustering. The method is described in Cuesta-Albertos et al. (1997) <doi:10.1214/aos/1031833664>.
 Maintainer: Valentin Todorov <valentin.todorov@chello.at>
 License: GPL (>=3)
-URL: http://www.homepages.ucl.ac.uk/~ucakche/
+URL: https://github.com/valentint/trimcluster
+BugReports: https://github.com/valentint/trimcluster/issues
 Packaged: 2020-02-08 18:29:38 UTC; Share
 Repository: CRAN
 Date/Publication: 2020-02-09 12:10:02 UTC
