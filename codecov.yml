@@ -14,4 +14,5 @@ coverage:
         informational: true
 
 
-CODECOV_TOKEN=a33e2e5f-12f2-434d-8cb8-19e9fef8958b
+codecov:
+token: a33e2e5f-12f2-434d-8cb8-19e9fef8958b
