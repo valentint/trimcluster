@@ -27,7 +27,23 @@ suppressPackageStartupMessages(library(trimcluster))
     ii <- ii+1
     X[ii,] <- rnorm(2)*8
   }
+
   tkm1 <- trimkmeans(X,k=3,trim=0.1,runs=3)
 # runs=3 is used to save computing time.
   print(tkm1)
   plot(tkm1,X)
+
+##  With fixed initial values
+  set.seed(1)
+  k <- 3
+  means <- X[sample(nrow(X), k), , drop=FALSE]
+  tkm2 <- trimkmeans(X, k=3, trim=0.1, runs=3, points=means, printcrit=TRUE)
+
+##  Univariate data
+  set.seed(2)
+  tkm3 <- trimkmeans(X[, 1, drop=FALSE], k=3, trim=0.1, runs=3)
+
+##  Multivariate data (p > 2)
+  set.seed(3)
+  tkm4 <- trimkmeans(iris[, 1:4], k=3, trim=0.1, runs=3)
+  
