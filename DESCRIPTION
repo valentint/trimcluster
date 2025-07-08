@@ -1,7 +1,7 @@
 Package: trimcluster
 Title: Cluster Analysis with Trimming
 Version: 0.1-6
-VersionNote: Released 0.1-5 on 2020-02-09 on CRAN
+VersionNote: Released 0.1-6 on 2025-06-28 on CRAN
 Authors@R: c(person("Christian", "Hennig", role = c("aut"), email = "chrish@stats.ucl.ac.uk")
          , person("Valentin", "Todorov", role = c("cre"), email = "valentin.todorov@chello.at", comment=c(ORCID = "0000-0003-4215-0245"))
           )
