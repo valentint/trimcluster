@@ -1,6 +1,0 @@
-2b8551b3843793bea8f082f7e0812d33 *DESCRIPTION
-e459426ecf92e9e25b071f647ffeb59c *NAMESPACE
-1d55a00bbc92b496b2599a9189add29d *R/trimkmeans.R
-7ef6b477807451e352c041ed7ab91ab6 *man/trimkmeans.Rd
-b2fad95798f0bdf016556bb1ab7a84c6 *tests/trtest.R
-398b8f78f6f80f540ad4a76c88a58689 *tests/trtest.Rout.save

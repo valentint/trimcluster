@@ -9,9 +9,10 @@
   portion of the points.
 }
 \usage{
-  trimkmeans(data,k,trim=0.1, scaling=FALSE, runs=100, points=NULL,
-                       countmode=runs+1, printcrit=FALSE,
-                       maxit=2*nrow(as.matrix(data)))
+  trimkmeans(data,k,trim=0.1, scaling=FALSE, 
+        runs=500, niter1=3, niter2=20, nkeep=5, points=NULL,
+        countmode, printcrit, maxit,
+        parallel=FALSE, n.cores=-1, trace=0, ...)
 
   \method{print}{tkm}(x, ...)
   \method{plot}{tkm}(x, data, ...)
@@ -22,26 +23,48 @@
   \item{trim}{numeric between 0 and 1. Proportion of points to be trimmed.}
   \item{scaling}{logical. If \code{TRUE}, the variables are centered at their
     means and scaled to unit variance before execution.}
-  \item{runs}{integer. Number of algorithm runs from initial
-    means (randomly chosen from the data points).}
+    \item{runs}{The number of random initializations to be performed.}
+    
+    \item{niter1}{The number of concentration steps to be performed for the nstart initializations.}
+    
+    \item{niter2}{The maximum number of concentration steps to be performed for the 
+    \code{nkeep} solutions kept for further iteration. The concentration steps are 
+    stopped, whenever two consecutive steps lead to the same data partition.}
+    
+    \item{nkeep}{The number of iterated initializations (after niter1 concentration 
+    steps) with the best values in the target function that are kept for further iterations}
+    
   \item{points}{\code{NULL} or a matrix with k vectors used
     as means to initialize the algorithm. If
     initial mean vectors are specified, \code{runs} should be 1
     (otherwise the same initial means are used for all runs).}
-  \item{countmode}{optional positive integer. Every \code{countmode}
+  \item{countmode}{(deprecated) optional positive integer. Every \code{countmode}
     algorithm runs \code{trimkmeans} shows a message.}
-  \item{printcrit}{logical. If \code{TRUE}, all criterion values (mean
+  \item{printcrit}{(deprecated) logical. If \code{TRUE}, all criterion values (mean
     squares) of the algorithm runs are printed.} 
-  \item{maxit}{integer. Maximum number of iterations within an algorithm
-    run. Each iteration determines all points which
-    are closer to a different cluster center than the one to which they are
-    currently assigned. The algorithm terminates if no more points have
-    to be reassigned, or if \code{maxit} is reached.}
+    \item{maxit}{(deprecated, use the combination \code{nkeep, niter1 and niter2}) 
+    The maximum number of concentration steps to be performed.
+    The concentration steps are stopped, whenever two consecutive steps lead
+    to the same data partition.}
+    \item{parallel}{A logical value, specifying whether the nstart initializations should be done in parallel.}
+    
+    \item{n.cores}{The number of cores to use when paralellizing, only taken into account if parallel=TRUE.}
+
+    \item{trace}{Defines the tracing level, which is set to 0 by default. Tracing level 1 
+    gives additional information on the stage of the iterative process.}
   \item{x}{object of class \code{tkm}.}
   \item{...}{further arguments to be transferred to \code{plot} or
     \code{\link[fpc]{plotcluster}}.} 
 }
 \details{
+    The function \code{trimkmeans()} now calls the function \code{tkmeans()} from 
+    the package \code{tclust}. This makes the procedure much faster since
+    (a) \code{tkmeans()} is implemented in C++, (b) a new random initialization is introduced
+    (see the parameters \code{niter1}, \code{niter2} and \code{nkeep} which replace 
+    the previous \code{maxit} and (c) it is posible to run the initialization in parallel
+    (see the argument \code{parallel} and \code{ncores}.
+    
+    
   \code{plot.tkm} calls \code{\link[fpc]{plotcluster}} if the
   dimensionality of the data \code{p} is 1, shows a scatterplot
   with non-trimmed regions if \code{p=2} and discriminant coordinates
@@ -100,8 +123,9 @@
     ii <- ii+1
     X[ii,] <- rnorm(2)*8
   }
-  tkm1 <- trimkmeans(X,k=3,trim=0.1,runs=3)
-# runs=3 is used to save computing time.
+  tkm1 <- trimkmeans(X, k=3, trim=0.1, runs=5)
+## runs=5 is used to save computing time; runs must be >= nkeep
+
   print(tkm1)
   plot(tkm1,X)
 }

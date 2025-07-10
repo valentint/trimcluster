@@ -1,14 +1,15 @@
 Package: trimcluster
 Title: Cluster Analysis with Trimming
-Version: 0.1-7
+Version: 0.2-0
 VersionNote: Released 0.1-6 on 2025-06-28 on CRAN
-Authors@R: c(person("Christian", "Hennig", role = c("aut"), email = "chrish@stats.ucl.ac.uk")
-         , person("Valentin", "Todorov", role = c("cre"), email = "valentin.todorov@chello.at", comment=c(ORCID = "0000-0003-4215-0245"))
+Authors@R: c(person("Christian", "Hennig", role = c("aut"), email = "christian.hennig@unibo.it")
+         , person("Valentin", "Todorov", role = c("cre"), email = "valentin@todorov.at", comment=c(ORCID = "0000-0003-4215-0245"))
           )
 Depends: R (>= 1.9.0)
+Imports: tclust
 Suggests: fpc
 Description: Trimmed k-means clustering. The method is described in Cuesta-Albertos et al. (1997) <doi:10.1214/aos/1031833664>.
-Maintainer: Valentin Todorov <valentin.todorov@chello.at>
+Maintainer: Valentin Todorov <valentin@todorov.at>
 License: GPL (>=3)
 URL: https://github.com/valentint/trimcluster
 BugReports: https://github.com/valentint/trimcluster/issues
