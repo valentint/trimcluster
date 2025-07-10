@@ -28,22 +28,36 @@ suppressPackageStartupMessages(library(trimcluster))
     X[ii,] <- rnorm(2)*8
   }
 
-  tkm1 <- trimkmeans(X, k=3, trim=0.1, runs=5)
+  tkm1 <- trimkmeans(X, k=3, trim=0.1, runs=5, scaling=TRUE)
 # runs=5 is used to save computing time.
   print(tkm1)
-  plot(tkm1,X)
+  plot(tkm1, X)
 
 ##  With fixed initial values
   set.seed(1)
   k <- 3
   means <- X[sample(nrow(X), k), , drop=FALSE]
-  tkm2 <- trimkmeans(X, k=3, trim=0.1, runs=5, points=means, printcrit=TRUE)
+  tkm2 <- trimkmeans(X, k=3, trim=0.1, runs=5, points=means)
 
 ##  Univariate data
   set.seed(2)
   tkm3 <- trimkmeans(X[, 1, drop=FALSE], k=3, trim=0.1, runs=5)
+  plot(tkm3, X[, 1, drop=FALSE])
 
 ##  Multivariate data (p > 2)
   set.seed(3)
-  tkm4 <- trimkmeans(iris[, 1:4], k=3, trim=0.1, runs=5)
-  
+  X1 <- as.matrix(iris[, 1:4])
+  tkm4 <- trimkmeans(X1, k=3, trim=0.1, runs=5)
+  plot(tkm4, X1)
+
+## use deprecated arguments  
+try(tkm5 <- trimkmeans(iris[, 1:4], k=3, trim=0.1, runs=5, countmode=100, 
+    printcrit=TRUE, maxit=1000))
+
+  tkmx1 <- trimcluster:::trimkmeans_orig(X, k=3, trim=0.1, runs=3, scaling=TRUE, countmode=10, printcrit=TRUE)
+# runs=3 is used to save computing time.
+
+  set.seed(1)
+  k <- 3
+  means <- X[sample(nrow(X), k), , drop=FALSE]
+  tkmx2 <- trimcluster:::trimkmeans_orig(X, k=3, trim=0.1, runs=3, points=means)

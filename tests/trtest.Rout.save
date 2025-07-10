@@ -45,7 +45,7 @@ Type 'q()' to quit R.
 +     X[ii,] <- rnorm(2)*8
 +   }
 > 
->   tkm1 <- trimkmeans(X, k=3, trim=0.1, runs=5)
+>   tkm1 <- trimkmeans(X, k=3, trim=0.1, runs=5, scaling=TRUE)
 > # runs=5 is used to save computing time.
 >   print(tkm1)
 * trimmed k-means *
@@ -62,29 +62,51 @@ Means:
 C 1 -4.948673 -4.978344
 C 2  5.125058  5.040808
 C 3  5.139695 -5.083246
-Trimmed mean squares:  1.214552 
->   plot(tkm1,X)
+Trimmed mean squares:  0.04719378 
+>   plot(tkm1, X)
 > 
 > ##  With fixed initial values
 >   set.seed(1)
 >   k <- 3
 >   means <- X[sample(nrow(X), k), , drop=FALSE]
->   tkm2 <- trimkmeans(X, k=3, trim=0.1, runs=5, points=means, printcrit=TRUE)
-Warning messages:
-1: In trimkmeans(X, k = 3, trim = 0.1, runs = 5, points = means, printcrit = TRUE) :
-  The parameter 'printcrit' is deprecated, please use 'trace'.
-2: In tkmeans(data, k = k, alpha = trim, scale = scaling, nstart = runs,  :
+>   tkm2 <- trimkmeans(X, k=3, trim=0.1, runs=5, points=means)
+Warning message:
+In tkmeans(data, k = k, alpha = trim, scale = scaling, nstart = runs,  :
   If initial mean vectors are specified, 'nstart' should be 1 (otherwise the same initial means are used for all runs)
 > 
 > ##  Univariate data
 >   set.seed(2)
 >   tkm3 <- trimkmeans(X[, 1, drop=FALSE], k=3, trim=0.1, runs=5)
+>   plot(tkm3, X[, 1, drop=FALSE])
 > 
 > ##  Multivariate data (p > 2)
 >   set.seed(3)
->   tkm4 <- trimkmeans(iris[, 1:4], k=3, trim=0.1, runs=5)
->   
+>   X1 <- as.matrix(iris[, 1:4])
+>   tkm4 <- trimkmeans(X1, k=3, trim=0.1, runs=5)
+>   plot(tkm4, X1)
+> 
+> ## use deprecated arguments  
+> try(tkm5 <- trimkmeans(iris[, 1:4], k=3, trim=0.1, runs=5, countmode=100, 
++     printcrit=TRUE, maxit=1000))
+Warning messages:
+1: In trimkmeans(iris[, 1:4], k = 3, trim = 0.1, runs = 5, countmode = 100,  :
+  The parameter 'maxit' is deprecated, please read the help and use the combination of 'niter1', 'niter2', 'nkeep'.
+2: In trimkmeans(iris[, 1:4], k = 3, trim = 0.1, runs = 5, countmode = 100,  :
+  The parameter 'countmode' is deprecated, please use 'trace'.
+3: In trimkmeans(iris[, 1:4], k = 3, trim = 0.1, runs = 5, countmode = 100,  :
+  The parameter 'printcrit' is deprecated, please use 'trace'.
+> 
+>   tkmx1 <- trimcluster:::trimkmeans_orig(X, k=3, trim=0.1, runs=3, scaling=TRUE, countmode=10, printcrit=TRUE)
+Iteration  1  criterion value  0.04719378 
+Iteration  2  criterion value  0.0472178 
+Iteration  3  criterion value  0.04719378 
+> # runs=3 is used to save computing time.
+> 
+>   set.seed(1)
+>   k <- 3
+>   means <- X[sample(nrow(X), k), , drop=FALSE]
+>   tkmx2 <- trimcluster:::trimkmeans_orig(X, k=3, trim=0.1, runs=3, points=means)
 > 
 > proc.time()
    user  system elapsed 
-   0.60    0.04    0.62 
+   1.35    0.32    1.67 
